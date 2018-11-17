@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="chart-flow">
+    <default-activity>buildModel</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>chartBean</managed-bean-name>
+      <managed-bean-class>blog.anirbanm.chart.view.ChartManager</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="buildModel">
+      <method>#{pageFlowScope.chartBean.buildModel}</method>
+      <outcome>
+        <fixed-outcome>buildmodel</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="ChartView">
+      <page>/WEB-INF/fragments/ChartView.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>buildModel</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>buildmodel</from-outcome>
+        <to-activity-id>ChartView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

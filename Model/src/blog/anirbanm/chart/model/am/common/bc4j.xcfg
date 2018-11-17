@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!---->
+<BC4JConfig xmlns="http://xmlns.oracle.com/bc4j/configuration" version="11.1">
+  <AppModuleConfigBag ApplicationName="blog.anirbanm.chart.model.am.ChartModule">
+    <AppModuleConfig name="ChartModuleLocal" jbo.project="blog.anirbanm.chart.model.Model"
+                     ApplicationName="blog.anirbanm.chart.model.am.ChartModule" DeployPlatform="LOCAL">
+      <Database jbo.TypeMapEntries="OracleApps" JDBCDataSource="jdbc/HrDS"/>
+      <Security AppModuleJndiName="blog.anirbanm.chart.model.am.ChartModule"/>
+    </AppModuleConfig>
+    <AppModuleConfig name="ChartModuleShared" jbo.project="blog.anirbanm.chart.model.Model"
+                     ApplicationName="blog.anirbanm.chart.model.am.ChartModule" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+      <Database jbo.TypeMapEntries="OracleApps" JDBCDataSource="jdbc/HrDS"/>
+      <Security AppModuleJndiName="blog.anirbanm.chart.model.am.ChartModule"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+</BC4JConfig>

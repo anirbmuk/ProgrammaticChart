@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14"
+                id="chart_flow_chart_flow_buildModelPageDef" Package="blog.anirbanm.chart.view.flows" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="buildDataModel" RequiresUpdateModel="true" Action="invokeMethod" MethodName="buildDataModel"
+                  IsViewObjectMethod="false" DataControl="ChartModuleDataControl"
+                  InstanceName="bindings.buildDataModel.dataControl.dataProvider"
+                  ReturnName="data.ChartModuleDataControl.methodResults.buildDataModel_buildDataModel_dataControl_dataProvider_buildDataModel_result"/>
+  </bindings>
+</pageDefinition>

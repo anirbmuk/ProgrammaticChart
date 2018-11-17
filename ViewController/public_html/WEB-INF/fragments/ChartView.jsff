@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="AFStretchWidth">
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <af:table value="#{pageFlowScope.chartBean.departments}" var="row" rowBandingInterval="0" id="t1"
+                      summary="Departments" autoHeightRows="6" styleClass="AFStretchWidth" rowSelection="single"
+                      emptyText="No departments found"
+                      selectionListener="#{pageFlowScope.chartBean.onDepartmentSelection}">
+                <af:column sortable="false" headerText="Id" id="c1" rowHeader="unstyled" width="120">
+                    <af:outputText value="#{row.departmentId}" id="ot1"/>
+                </af:column>
+                <af:column sortable="false" headerText="Name" id="c2" width="120">
+                    <af:outputText value="#{row.departmentName}" id="ot2"/>
+                </af:column>
+                <af:column sortable="false" headerText="Manager" id="c3" width="120">
+                    <af:outputText value="#{row.managerId}" id="ot3"/>
+                </af:column>
+                <af:column sortable="false" headerText="Location" id="c4" width="120">
+                    <af:outputText value="#{row.locationId}" id="ot4"/>
+                </af:column>
+            </af:table>
+        </af:panelCollection>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth" partialTriggers="pc1:t1">
+            <af:panelSplitter id="ps1" styleClass="AFStretchWidth" splitterPosition="414"
+                              rendered="#{pageFlowScope.chartBean.showChart}">
+                <f:facet name="first">
+                    <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                        <f:facet name="center">
+                            <dvt:pieGraph id="pieGraph1" subType="PIE" emptyText="No chart data" shortDesc="PIE"
+                                          threeDEffect="true" seriesRolloverBehavior="RB_DIM"
+                                          dynamicResize="DYNAMIC_SIZE"
+                                          tabularData="#{pageFlowScope.chartBean.pieChart.graphData['PieChart']}"
+                                          animationOnDisplay="none">
+                                <dvt:background>
+                                    <dvt:specialEffects fillType="FT_GRADIENT"/>
+                                </dvt:background>
+                                <dvt:graphPieFrame/>
+                                <dvt:seriesSet>
+                                    <dvt:series/>
+                                </dvt:seriesSet>
+                                <dvt:graphTitle horizontalAlignment="CENTER" text="Group employees by JOB"/>
+                                <dvt:pieLabel rendered="true"/>
+                                <dvt:legendArea automaticPlacement="AP_NEVER" position="LAP_BOTTOM"/>
+                            </dvt:pieGraph>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="second">
+                    <af:panelStretchLayout id="psl2" styleClass="AFStretchWidth">
+                        <f:facet name="center">
+                            <dvt:barGraph id="barGraph1" shortDesc="BAR" emptyText="No salary data"
+                                          tabularData="#{pageFlowScope.chartBean.barChart.graphData['BarChart']}"
+                                          subType="BAR_VERT_CLUST" animationOnDisplay="none"
+                                          seriesRolloverBehavior="RB_DIM" styleClass="AFStretchWidth"
+                                          dynamicResize="DYNAMIC_SIZE">
+                                <dvt:background>
+                                    <dvt:specialEffects fillType="FT_GRADIENT"/>
+                                </dvt:background>
+                                <dvt:graphPlotArea/>
+                                <dvt:seriesSet>
+                                    <dvt:series color="#267db3" borderColor="#f5f5f5" borderTransparent="false"
+                                                id="open" lineWidth="10"/>
+                                </dvt:seriesSet>
+                                <dvt:o1Axis/>
+                                <dvt:y1Axis/>
+                                <dvt:legendArea automaticPlacement="AP_ALWAYS" position="LAP_BOTTOM"/>
+                                <dvt:graphTitle horizontalAlignment="CENTER" text="Employee Salaries"/>
+                            </dvt:barGraph>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </f:facet>
+            </af:panelSplitter>
+            <af:outputText value="No employees for this department" inlineStyle="font-weight: bold;" id="ot5"
+                           rendered="#{!pageFlowScope.chartBean.showChart}"/>
+        </af:panelGroupLayout>
+    </af:panelGroupLayout>
+</jsp:root>
