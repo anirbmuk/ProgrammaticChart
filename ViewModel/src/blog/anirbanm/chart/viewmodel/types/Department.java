@@ -33,7 +33,7 @@ public class Department implements Serializable {
     }
     
     public void addEmployees(List<Employee> employees) {
-        setEmployees(employees);
+        getEmployees().addAll(employees);
     }
 
     @Override
