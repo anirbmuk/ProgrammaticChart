@@ -22,8 +22,10 @@ public class ChartManager implements Serializable {
     private List<Department> departments;
     private Department selectedDepartment;
     private Boolean showChart;
+    
     private PieChart pieChart;
     private BarChart barChart;
+    private GaugeChart gaugeChart;
 
     public ChartManager() {
     }
@@ -32,6 +34,7 @@ public class ChartManager implements Serializable {
         setShowChart(false);
         pieChart = new PieChart();
         barChart = new BarChart();
+        gaugeChart = new GaugeChart();
         setDepartments((List<Department>) ADFUtils.findOperation("buildDataModel").execute());
     }
 
@@ -49,6 +52,9 @@ public class ChartManager implements Serializable {
                 setShowChart(employees.size() > 0);
                 pieChart.plotChart("PieChart", employees);
                 barChart.plotChart("BarChart", employees);
+                
+                gaugeChart.setDepartmentName(selectedDepartment.getDepartmentName());
+                gaugeChart.plotChart("GaugeChart", employees);
             }
         }
     }
@@ -91,5 +97,13 @@ public class ChartManager implements Serializable {
 
     public BarChart getBarChart() {
         return barChart;
+    }
+
+    public void setGaugeChart(GaugeChart gaugeChart) {
+        this.gaugeChart = gaugeChart;
+    }
+
+    public GaugeChart getGaugeChart() {
+        return gaugeChart;
     }
 }

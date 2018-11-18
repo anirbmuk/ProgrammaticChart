@@ -3,28 +3,47 @@
           xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
     <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="AFStretchWidth">
         <af:spacer width="10" height="10" id="s1"/>
-        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
-            <af:table value="#{pageFlowScope.chartBean.departments}" var="row" rowBandingInterval="0" id="t1"
-                      summary="Departments" autoHeightRows="6" styleClass="AFStretchWidth" rowSelection="single"
-                      emptyText="No departments found"
-                      selectionListener="#{pageFlowScope.chartBean.onDepartmentSelection}">
-                <af:column sortable="false" headerText="Id" id="c1" rowHeader="unstyled" width="120">
-                    <af:outputText value="#{row.departmentId}" id="ot1"/>
-                </af:column>
-                <af:column sortable="false" headerText="Name" id="c2" width="120">
-                    <af:outputText value="#{row.departmentName}" id="ot2"/>
-                </af:column>
-                <af:column sortable="false" headerText="Manager" id="c3" width="120">
-                    <af:outputText value="#{row.managerId}" id="ot3"/>
-                </af:column>
-                <af:column sortable="false" headerText="Location" id="c4" width="120">
-                    <af:outputText value="#{row.locationId}" id="ot4"/>
-                </af:column>
-            </af:table>
-        </af:panelCollection>
+        <af:panelSplitter id="ps1" styleClass="AFStretchWidth" splitterPosition="544">
+            <f:facet name="first">
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                    <af:table value="#{pageFlowScope.chartBean.departments}" var="row" rowBandingInterval="0" id="t1"
+                              summary="Departments" autoHeightRows="6" styleClass="AFStretchWidth" rowSelection="single"
+                              emptyText="No departments found"
+                              selectionListener="#{pageFlowScope.chartBean.onDepartmentSelection}">
+                        <af:column sortable="false" headerText="Id" id="c1" rowHeader="unstyled" width="120">
+                            <af:outputText value="#{row.departmentId}" id="ot1"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Name" id="c2" width="120">
+                            <af:outputText value="#{row.departmentName}" id="ot2"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Manager" id="c3" width="120">
+                            <af:outputText value="#{row.managerId}" id="ot3"/>
+                        </af:column>
+                        <af:column sortable="false" headerText="Location" id="c4" width="120">
+                            <af:outputText value="#{row.locationId}" id="ot4"/>
+                        </af:column>
+                    </af:table>
+                </af:panelCollection>
+            </f:facet>
+            <f:facet name="second">
+                <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="AFStretchWidth" halign="center"
+                                     partialTriggers="pc1:t1">
+                    <dvt:gauge id="dialGauge1"
+                               tabularData="#{pageFlowScope.chartBean.gaugeChart.graphData['GaugeChart']}"
+                               gaugeType="DIAL" dynamicResize="DYNAMIC_SIZE" shortDesc="DIAL"
+                               rendered="#{pageFlowScope.chartBean.showChart}">
+                        <dvt:thresholdSet>
+                            <dvt:threshold fillColor="#cc2255" thresholdMaxValue="10"/>
+                            <dvt:threshold fillColor="#ffcc00" thresholdMaxValue="60"/>
+                            <dvt:threshold fillColor="#00aa00"/>
+                        </dvt:thresholdSet>
+                    </dvt:gauge>
+                </af:panelGroupLayout>
+            </f:facet>
+        </af:panelSplitter>
         <af:spacer width="10" height="10" id="s2"/>
         <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth" partialTriggers="pc1:t1">
-            <af:panelSplitter id="ps1" styleClass="AFStretchWidth" splitterPosition="414"
+            <af:panelSplitter id="ps2" styleClass="AFStretchWidth" splitterPosition="414"
                               rendered="#{pageFlowScope.chartBean.showChart}">
                 <f:facet name="first">
                     <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
